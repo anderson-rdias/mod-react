@@ -1,0 +1,72 @@
+React = SPA (Single Page Application).
+Possui somente 1 página, utilizando sistemas de rotas para "esconder" e alternar os componentes diferentes.
+
+component = tag especial de um conjunto de html
+Uma classe que herda a classe component do react e retorna html dentro método render.
+
+Arquivos .jsx = Componente, permite reconhecer que o arquivo é uma mistura de html com js.
+
+Melhor prática usar o export class ao invés do export default
+
+
+método state() = definir o valor default do atributo
+método setState() = mudar o valor do estado
+
+Ex:
+
+import React from "react";
+
+export class Counter extends React.Component {
+
+    constructor() {
+        super()
+        // this.contador = 0;
+        this.state = { contador: 0 }
+    }
+    render() {
+        return (
+            <div style={{ marginTop: '20px', marginLeft: '20px' }}>
+                <h1>{this.state.contador}</h1>
+                <div>
+                    <button onClick={() => {
+                        this.setState({ contador: this.state.contador - 1 })
+                    }}>Diminuir</button>
+                    <button onClick={() => {
+                        this.setState({ contador: this.state.contador + 1 })
+                    }}
+                    >
+                        Aumentar
+                    </button>
+                </div>
+            </div>
+        );
+    }
+}
+
+
+CICLO DE VIDA DOS COMPONENTES:
+
+1. Montagem:
+1º constructor
+2º UNSAFE_componentWillMount()
+3º render()
+4º componentDidMount()
+==================================================================
+
+
+2. Atualização:
+1º shouldComponentUpdate() -> por padrão retorna true permitindo edição do state, se setado como false, ele bloqueia a atualização dos states. Ex:
+shouldComponentUpdate(){
+        return false;
+}
+3º UNSAFE_componentWillUpdate()
+3º render() ** O componente é sempre renderizado quando o valor do state é alterado (Re-render)
+4º componentDidUpdate()
+
+==================================================================
+
+3. Desmontagem
+componentWillUnmount() -> Utilizado por boas práticas para cancelar as requisições e eventos, melhorando assim a performance do app.
+
+
+==================================================================
